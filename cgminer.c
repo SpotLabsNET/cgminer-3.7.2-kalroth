@@ -272,7 +272,7 @@ static struct pool *currentpool = NULL;
 int total_pools, enabled_pools;
 enum pool_strategy pool_strategy = POOL_FAILOVER;
 int opt_rotate_period;
-static int total_urls, total_users, total_passes, total_userpasses, total_poolnames;
+static int total_urls, total_users, total_passes, total_userpasses, total_poolnames, total_noextranonce;
 
 static
 #ifndef HAVE_CURSES
@@ -940,8 +940,13 @@ static char *set_userpass(const char *arg)
 
 static char *set_no_extranonce_subscribe(char *arg)
 {
-	struct pool *pool = get_current_pool();
+	struct pool *pool;
 
+	total_noextranonce++;
+	if (total_noextranonce > total_pools)
+		add_pool();
+
+	pool = pools[total_noextranonce - 1];
 	applog(LOG_DEBUG, "Disable extranonce subscribe on %d", pool->pool_no);
 	opt_set_invbool(&pool->extranonce_subscribe);
 
