@@ -2484,7 +2484,7 @@ static void curses_print_status(void)
 	struct pool *pool = current_pool();
 
 	wattron(statuswin, A_BOLD);
-	cg_mvwprintw(statuswin, 0, 0, " " PACKAGE " version " VERSION " - Started: %s", datestamp);
+	cg_mvwprintw(statuswin, 0, 0, " " PACKAGE " version " CGMINER_VERSION " - Started: %s", datestamp);
 	curses_print_uptime();
 	wclrtoeol(statuswin);
 	wattroff(statuswin, A_BOLD);
@@ -8334,7 +8334,7 @@ int main(int argc, char *argv[])
 
 	initialise_usb();
 
-	snprintf(packagename, sizeof(packagename), "%s %s", PACKAGE, VERSION);
+	snprintf(packagename, sizeof(packagename), "%s %s", PACKAGE, CGMINER_VERSION);
 
 	handler.sa_handler = &sighandler;
 	handler.sa_flags = 0;
