@@ -454,6 +454,7 @@ else
 	LIBCURL_LIBS=""
 fi
 AC_SUBST(LIBCURL_LIBS)
+AC_SUBST(LIBCURL_CFLAGS)
 
 
 #check execv signature
